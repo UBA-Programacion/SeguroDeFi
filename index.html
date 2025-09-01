@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DeFinsure</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="presentation-container">
+      <!-- Barra de progreso global -->
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <!-- Panel de control del presentador -->
+      <div class="presenter-controls" id="presenterControls">
+        <div class="controls-header">
+          <h3>Panel de Control</h3>
+          <button class="minimize-btn" id="minimizeBtn">−</button>
+        </div>
+
+        <div class="controls-content">
+          <div class="control-section">
+            <div class="slide-info">
+              <span class="slide-counter">
+                <span id="currentSlide">1</span> /
+                <span id="totalSlides">15</span>
+              </span>
+              <div class="slide-timer">
+                <div class="timer-display">
+                  <span id="slideTimer">30</span>s
+                </div>
+                <div class="timer-bar">
+                  <div class="timer-fill" id="timerFill"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="control-section">
+            <div class="playback-controls">
+              <button class="control-btn play-pause" id="playPauseBtn">
+                <span class="play-icon">▶</span>
+                <span class="pause-icon" style="display: none">⏸</span>
+              </button>
+              <button class="control-btn" id="prevBtn">◀</button>
+              <button class="control-btn" id="nextBtn">▶</button>
+              <button class="control-btn" id="resetBtn">⟲</button>
+              <button class="control-btn" id="fullscreenBtn">⛶</button>
+            </div>
+          </div>
+
+          <div class="control-section">
+            <div class="speed-controls">
+              <label>Velocidad:</label>
+              <select id="speedSelect">
+                <option value="15">15s</option>
+                <option value="30" selected>30s</option>
+                <option value="45">45s</option>
+                <option value="60">60s</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="control-section">
+            <div class="session-info">
+              <div class="time-info">
+                <span>Tiempo total: <span id="totalTime">0:00</span></span>
+              </div>
+              <div class="slide-notes" id="slideNotes">
+                <small>Click Play para iniciar la presentación</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navegación por números de slide -->
+      <div class="slide-navigation" id="slideNavigation">
+        <div class="nav-numbers">
+          <span class="slide-number active" data-slide="1">1</span>
+          <span class="slide-number" data-slide="2">2</span>
+          <span class="slide-number" data-slide="3">3</span>
+          <span class="slide-number" data-slide="4">4</span>
+          <span class="slide-number" data-slide="5">5</span>
+          <span class="slide-number" data-slide="6">6</span>
+          <span class="slide-number" data-slide="7">7</span>
+          <span class="slide-number" data-slide="8">8</span>
+          <span class="slide-number" data-slide="9">9</span>
+          <span class="slide-number" data-slide="10">10</span>
+          <span class="slide-number" data-slide="11">11</span>
+          <span class="slide-number" data-slide="12">12</span>
+          <span class="slide-number" data-slide="13">13</span>
+          <span class="slide-number" data-slide="14">14</span>
+          <span class="slide-number" data-slide="15">15</span>
+        </div>
+      </div>
+
+      <!-- Contenedor principal de slides -->
+      <div class="slides-container" id="slidesContainer">
+        <!-- Slide 1: Portada -->
+        <div class="slide active" data-slide="1">
+          <div class="slide-content cover-slide">
+            <div class="logo-section">
+              <div class="logo">DeFinsure</div>
+              <div class="subtitle">Seguros Blockchain</div>
+            </div>
+            <h1 class="main-title">Donde cada póliza es un NFT de valor</h1>
+            <p class="tagline">Tu seguridad, nuestro protocolo</p>
+            <div class="hero-features">
+              <div class="feature-badge">🛡️ Seguros</div>
+              <div class="feature-badge">🔗 Blockchain</div>
+              <div class="feature-badge">📡 IoT</div>
+              <div class="feature-badge">🌾 DeFi</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2: Problemática Global -->
+        <div class="slide" data-slide="2">
+          <div class="slide-content">
+            <h2>Problemática Global</h2>
+            <div class="problem-layout">
+              <div class="crisis-header">
+                <h3>Crisis del Sector Seguros</h3>
+              </div>
+              <div class="stats-grid">
+                <div class="stat-card critical">
+                  <div class="stat-number">$383B</div>
+                  <div class="stat-label">pérdidas anuales por desastres</div>
+                </div>
+                <div class="stat-card warning">
+                  <div class="stat-number">34%</div>
+                  <div class="stat-label">Solo está cubierto</div>
+                </div>
+                <div class="stat-card danger">
+                  <div class="stat-number">+10%</div>
+                  <div class="stat-label">aumento eventos extremos</div>
+                </div>
+                <div class="stat-card info">
+                  <div class="stat-number">Semanas</div>
+                  <div class="stat-label">Demoras burocráticas</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3: Solución DeFinsure -->
+        <div class="slide" data-slide="3">
+          <div class="slide-content">
+            <h2>Solución DeFinsure</h2>
+            <div class="solution-header">
+              <h3>Pool Mutualizado + IoT + DeFi</h3>
+            </div>
+            <div class="features-grid">
+              <div class="feature-card">
+                <div class="feature-icon">🚫</div>
+                <h4>Eliminación de intermediarios</h4>
+                <p>Protocolo descentralizado sin intermediarios costosos</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h4>Validación automatizada IoT</h4>
+                <p>Sensores inteligentes verifican siniestros automáticamente</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h4>Pagos en minutos, no semanas</h4>
+                <p>Smart contracts ejecutan pagos instantáneamente</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h4>Transparencia total on-chain</h4>
+                <p>Todas las operaciones son públicas y auditables</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">🗞️</div>
+                <h4>Simpleaza en los Tramites </h4>
+                <p>No es necesario el papeleo habitual de los seguros tradicionales </p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h4>Más seguro que un seguro</h4>
+                <p>Simple, sin papeles, automático y controlado</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 4: Arquitectura del Pool -->
+        <div class="slide" data-slide="4">
+          <div class="slide-content">
+            <h2>Arquitectura del Pool</h2>
+            <div class="architecture-header">
+              <h3>Tramos Fijos Anti-Gaming</h3>
+            </div>
+            <div class="tranches-layout">
+              <div class="tranche-card junior">
+                <div class="tranche-header">
+                  <h4>Junior</h4>
+                  <span class="tranche-percent">45%</span>
+                </div>
+                <p class="tranche-description">Alto riesgo/Alto rendimiento</p>
+                <div class="risk-indicator high">
+                  🔥 Primera línea de pérdida
+                </div>
+              </div>
+              <div class="tranche-card medium">
+                <div class="tranche-header">
+                  <h4>Medio</h4>
+                  <span class="tranche-percent">35%</span>
+                </div>
+                <p class="tranche-description">Riesgo balanceado</p>
+                <div class="risk-indicator medium">
+                  ⚖️ Equilibrio riesgo/rendimiento
+                </div>
+              </div>
+              <div class="tranche-card senior">
+                <div class="tranche-header">
+                  <h4>Senior</h4>
+                  <span class="tranche-percent">20%</span>
+                </div>
+                <p class="tranche-description">Bajo riesgo/Conservador</p>
+                <div class="risk-indicator low">🛡️ Máxima protección</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 5: Tokenomics SOS -->
+        <div class="slide" data-slide="5">
+          <div class="slide-content">
+            <h2>Tokenomics SOS</h2>
+            <div class="tokenomics-header">
+              <h3>Supply 1,000,000 Tokens</h3>
+            </div>
+            <div class="tokenomics-layout">
+              <div class="token-distribution">
+                <div class="distribution-chart">
+                  <div
+                    class="chart-segment"
+                    data-percent="45"
+                    style="background: var(--color-yellow)"
+                  >
+                    <span style="color: #000">Farm Incentives 45%</span>
+                  </div>
+                  <div
+                    class="chart-segment"
+                    data-percent="20"
+                    style="background: var(--color-success)"
+                  >
+                    <span>Ecosystem 20%</span>
+                  </div>
+                  <div
+                    class="chart-segment"
+                    data-percent="15"
+                    style="background: var(--color-warning)"
+                  >
+                    <span>Team 15%</span>
+                  </div>
+                  <div
+                    class="chart-segment"
+                    data-percent="15"
+                    style="background: var(--color-info)"
+                  >
+                    <span>Community 15%</span>
+                  </div>
+                  <div
+                    class="chart-segment"
+                    data-percent="5"
+                    style="background: var(--color-error)"
+                  >
+                    <span>Liquidity 5%</span>
+                  </div>
+                </div>
+              </div>
+              <div class="apr-highlight">
+                <div class="apr-card">
+                  <h4>10-20% APR Farming</h4>
+                  <p>Rendimientos sostenibles para proveedores de liquidez</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 6: Pool Cooperativo -->
+        <div class="slide" data-slide="6">
+          <div class="slide-content">
+            <h2>Pool Cooperativo</h2>
+            <div class="pool-header">
+              <h3>Estructura de Riesgo y Solvencia</h3>
+            </div>
+            <div class="pool-features">
+              <div class="feature-highlight">
+                <div class="highlight-icon">🛡️</div>
+                <h4>Colchón primario absorbe impactos</h4>
+                <p>Buffer dinámico que se ajusta automáticamente</p>
+              </div>
+              <div class="feature-highlight">
+                <div class="highlight-icon">💧</div>
+                <h4>Cascada JR → MD → SR</h4>
+                <p>Sistema de absorción de pérdidas progresivo</p>
+              </div>
+              <div class="feature-highlight">
+                <div class="highlight-icon">📊</div>
+                <h4>Ratio solvencia 1.6x</h4>
+                <p>Reservas superiores a estándares tradicionales</p>
+              </div>
+              <div class="feature-highlight">
+                <div class="highlight-icon">✅</div>
+                <h4>95.7% siniestros solo afectan colchón</h4>
+                <p>Protección excepcional para inversores</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 7: xSOS Cobertura Sintética -->
+        <div class="slide" data-slide="7">
+          <div class="slide-content">
+            <h2>xSOS Cobertura Sintética</h2>
+            <div class="coverage-header">
+              <h3>Pólizas Como NFTs Negociables</h3>
+            </div>
+            <div class="mechanics-grid">
+              <div class="mechanic-card">
+                <div class="mechanic-icon">⚖️</div>
+                <h4>Minteo ratio mínima 2:1</h4>
+                <p>Garantía de colateralización robusta</p>
+              </div>
+              <div class="mechanic-card">
+                <div class="mechanic-icon">🪙</div>
+                <h4>LP-tokens como colateral</h4>
+                <p>Uso eficiente de activos productivos</p>
+              </div>
+              <div class="mechanic-card">
+                <div class="mechanic-icon">🔄</div>
+                <h4>Transferible en mercados secundarios</h4>
+                <p>Liquidez y flexibilidad para asegurados</p>
+              </div>
+              <div class="mechanic-card">
+                <div class="mechanic-icon">🔥</div>
+                <h4>Burn automático en claims</h4>
+                <p>Ejecución automatizada de contratos</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 8: Integración IoT -->
+        <div class="slide" data-slide="8">
+          <div class="slide-content">
+            <h2>Integración IoT</h2>
+            <div class="iot-header">
+              <h3>Sensores LoRa/Helium Híbridos</h3>
+            </div>
+            <div class="tech-features">
+              <div class="tech-card">
+                <div class="tech-icon">⏱️</div>
+                <h4>Validación en tiempo real</h4>
+                <p>Monitoreo continuo 24/7 de condiciones</p>
+              </div>
+              <div class="tech-card">
+                <div class="tech-icon">🤝</div>
+                <h4>Consenso > 50% fuentes</h4>
+                <p>Múltiples sensores confirman eventos</p>
+              </div>
+              <div class="tech-card">
+                <div class="tech-icon">🔄</div>
+                <h4>Redundancia anti-fallos</h4>
+                <p>Sistemas backup garantizan disponibilidad</p>
+              </div>
+              <div class="tech-card">
+                <div class="tech-icon">🎯</div>
+                <h4>>80% precisión en métricas</h4>
+                <p>Alta confiabilidad en detección de eventos</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 9: Gobernanza KYC/ZK -->
+        <div class="slide" data-slide="9">
+          <div class="slide-content">
+            <h2>Gobernanza KYC/ZK</h2>
+            <div class="governance-header">
+              <h3>Democracia Real Anti-Ballenas</h3>
+            </div>
+            <div class="governance-features">
+              <div class="gov-card">
+                <div class="gov-icon">🗳️</div>
+                <h4>Una persona = un voto</h4>
+                <p>Verdadera democracia descentralizada</p>
+              </div>
+              <div class="gov-card">
+                <div class="gov-icon">🔐</div>
+                <h4>Zero-knowledge privacy</h4>
+                <p>Verificación de identidad sin revelar datos</p>
+              </div>
+              <div class="gov-card">
+                <div class="gov-icon">📈</div>
+                <h4>Multiplicadores por tramo 33.3%</h4>
+                <p>Bonificaciones por participación activa</p>
+              </div>
+              <div class="gov-card">
+                <div class="gov-icon">🔒</div>
+                <h4>Multisig emergencia 5/7</h4>
+                <p>Protocolo de seguridad para situaciones críticas</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 10: Casos de Uso -->
+        <div class="slide" data-slide="10">
+          <div class="slide-content">
+            <h2>Casos de Uso</h2>
+            <div class="usecases-header">
+              <h3>Aplicaciones del Mundo Real</h3>
+            </div>
+            <div class="usecases-grid">
+              <div class="usecase-card agriculture">
+                <div class="usecase-icon">🌾</div>
+                <h4>Agricultura</h4>
+                <p>Sensores granizo/sequía</p>
+              </div>
+              <div class="usecase-card travel">
+                <div class="usecase-icon">✈️</div>
+                <h4>Viajes</h4>
+                <p>Cancelaciones automáticas</p>
+              </div>
+              <div class="usecase-card cyber">
+                <div class="usecase-icon">🔒</div>
+                <h4>Ciberseguridad</h4>
+                <p>Cobertura ataques DeFi</p>
+              </div>
+              <div class="usecase-card automotive">
+                <div class="usecase-icon">🚗</div>
+                <h4>Automotor</h4>
+                <p>Telemetría en tiempo real</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 11: Actores del Ecosistema -->
+        <div class="slide" data-slide="11">
+          <div class="slide-content">
+            <h2>Actores del Ecosistema</h2>
+            <div class="actors-header">
+              <h3>Roles y Responsabilidades</h3>
+            </div>
+            <div class="actors-grid">
+              <div class="actor-card">
+                <div class="actor-icon">💰</div>
+                <h4>LPs</h4>
+                <p>Proveen liquidez, reciben LP-tokens</p>
+              </div>
+              <div class="actor-card">
+                <div class="actor-icon">🌾</div>
+                <h4>Farmers</h4>
+                <p>Stakean para yields 10-20%</p>
+              </div>
+              <div class="actor-card">
+                <div class="actor-icon">🛡️</div>
+                <h4>Asegurados</h4>
+                <p>Mintean xSOS, instalan sensores</p>
+              </div>
+              <div class="actor-card">
+                <div class="actor-icon">🔮</div>
+                <h4>Oráculos</h4>
+                <p>Validan siniestros híbridos</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 12: Roadmap Épico -->
+        <div class="slide" data-slide="12">
+          <div class="slide-content">
+            <h2>Roadmap Épico</h2>
+            <div class="roadmap-header">
+              <h3>10 Etapas Científicas</h3>
+            </div>
+            <div class="roadmap-grid">
+              <div class="roadmap-stage">
+                <div class="stage-icon">🍎</div>
+                <h4>Newton</h4>
+                <p>Planificación - 1 mes</p>
+              </div>
+              <div class="roadmap-stage">
+                <div class="stage-icon">⚛️</div>
+                <h4>Curie</h4>
+                <p>Investigación datos - 1 mes</p>
+              </div>
+              <div class="roadmap-stage">
+                <div class="stage-icon">🧠</div>
+                <h4>Einstein</h4>
+                <p>Desarrollo técnico - 2 meses</p>
+              </div>
+              <div class="roadmap-stage">
+                <div class="stage-icon">⚡</div>
+                <h4>Tesla</h4>
+                <p>Integración IoT - 1 mes</p>
+              </div>
+              <div class="roadmap-stage">
+                <div class="stage-icon">🐒</div>
+                <h4>Darwin</h4>
+                <p>Tokenomics - 1 mes</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 13: Equipo Técnico -->
+        <div class="slide" data-slide="13">
+          <div class="slide-content">
+            <h2>Equipo Técnico</h2>
+            <div class="team-header">
+              <h3>Experiencia Blockchain Comprobada</h3>
+            </div>
+            <div class="team-grid">
+              <div class="team-member">
+                <div>
+                  <img class="member-avatar" src="assets/G1.png" style="heigth:10%; width:15%" >
+                </div>
+                <h4>Gustavo Romero</h4>
+                <h5>CTO</h5>
+                <p>Ingeniería + Matemáticas</p>
+              </div>
+              <div class="team-member">
+                <div>
+                  <img class="member-avatar" src="assets/s2.png" style="heigth:10%; width:15%" >
+                </div>
+                <h4>Sandra Leguizamón</h4>
+                <h5>CEO</h5>
+                <p>Comunicación + DeFi</p>
+              </div>
+              <div class="team-member">
+                <div>
+                  <img class="member-avatar" src="assets/m3.png" style="heigth:10%; width:15%" >
+                </div>
+                <h4>Nelson Contreras</h4>
+                <h5>CoFounder</h5>
+                <p>Economía + UX</p>
+              </div>
+              <div class="team-member">
+                <div>
+                  <img class="member-avatar" src="assets/c4.png" style="heigth:10%; width:15%" >
+                </div>
+                <h4>Carolina Arraya</h4>
+                <h5>CM & SEO</h5>
+                <p>Inglés + Marketing</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 14: Aspectos Legales -->
+        <div class="slide" data-slide="14">
+          <div class="slide-content">
+            <h2>Aspectos Legales</h2>
+            <div class="legal-header">
+              <h3>Compliance Multi-Jurisdicción</h3>
+            </div>
+            <div class="legal-features">
+              <div class="legal-card">
+                <div class="legal-icon">📜</div>
+                <h4>Contrato modelo internacional</h4>
+                <p>Marco legal adaptable a diferentes jurisdicciones</p>
+              </div>
+              <div class="legal-card">
+                <div class="legal-icon">🔐</div>
+                <h4>Cumplimiento GDPR, AML, KYC</h4>
+                <p>Estándares internacionales de privacidad y seguridad</p>
+              </div>
+              <div class="legal-card">
+                <div class="legal-icon">🌍</div>
+                <h4>Adaptación por país (US, EU, LATAM)</h4>
+                <p>Compliance específico por región operativa</p>
+              </div>
+              <div class="legal-card">
+                <div class="legal-icon">⚖️</div>
+                <h4>Framework regulatorio blockchain</h4>
+                <p>Cumplimiento de normativas emergentes DeFi</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 15: Conclusión/CTA -->
+        <div class="slide" data-slide="15">
+          <div class="slide-content conclusion-slide">
+            <div class="conclusion-header">
+              <h2>¡Únete a la Revolución!</h2>
+              <h3>La Seguridad de tu Futuro es Descentralizada</h3>
+            </div>
+            <div class="cta-content">
+              <p class="cta-message">
+                Construyamos juntos el futuro de los seguros
+              </p>
+              <div class="contact-info">
+                <h4>definsure.com | info@definsure.com</h4>
+              </div>
+              <div class="cta-buttons">
+                <button
+                  class="btn btn--primary btn--lg"
+                  id="whitelistBtn"
+                  disabled
+                >
+                  Únete a la Whitelist
+                </button>
+                <input
+                  type="email"
+                  class="btn btn--email btn--lg"
+                  placeholder="Ingresa tu email"
+                  id="emailInput"
+                />
+                <button class="btn btn--outline btn--lg" id="docsBtn" disabled>
+                  Explorar Documentación
+                </button>
+              </div>
+            </div>
+            <div class="revolution-badges">
+              <div class="rev-badge">🚀 Innovación</div>
+              <div class="rev-badge">🔒 Seguridad</div>
+              <div class="rev-badge">🌐 Descentralización</div>
+              <div class="rev-badge">💎 Transparencia</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
